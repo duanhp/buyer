@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duan.buyer.dao.UserPurchaseOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.duan.buyer.entity.UserPurchaseOrder" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="purchase_date" property="purchaseDate" jdbcType="VARCHAR" />
+    <result column="shop_owner_code" property="shopOwnerCode" jdbcType="VARCHAR" />
+    <result column="purchase_code" property="purchaseCode" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, company_code, purchase_date, shop_owner_code, purchase_code, status, gmt_create, 
+    gmt_modify, order_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duan.buyer.entity.UserPurchaseOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_purchase_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_purchase_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_purchase_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.duan.buyer.entity.UserPurchaseOrderExample" >
+    delete from user_purchase_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.duan.buyer.entity.UserPurchaseOrder" >
+    insert into user_purchase_order (id, company_code, purchase_date, 
+      shop_owner_code, purchase_code, status, 
+      gmt_create, gmt_modify, order_code
+      )
+    values (#{id,jdbcType=BIGINT}, #{companyCode,jdbcType=VARCHAR}, #{purchaseDate,jdbcType=VARCHAR}, 
+      #{shopOwnerCode,jdbcType=VARCHAR}, #{purchaseCode,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{orderCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.duan.buyer.entity.UserPurchaseOrder" >
+    insert into user_purchase_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyCode != null" >
+        company_code,
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date,
+      </if>
+      <if test="shopOwnerCode != null" >
+        shop_owner_code,
+      </if>
+      <if test="purchaseCode != null" >
+        purchase_code,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+      <if test="orderCode != null" >
+        order_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseDate != null" >
+        #{purchaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="shopOwnerCode != null" >
+        #{shopOwnerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseCode != null" >
+        #{purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderCode != null" >
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.duan.buyer.entity.UserPurchaseOrderExample" resultType="java.lang.Integer" >
+    select count(*) from user_purchase_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_purchase_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.companyCode != null" >
+        company_code = #{record.companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseDate != null" >
+        purchase_date = #{record.purchaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopOwnerCode != null" >
+        shop_owner_code = #{record.shopOwnerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseCode != null" >
+        purchase_code = #{record.purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModify != null" >
+        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderCode != null" >
+        order_code = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_purchase_order
+    set id = #{record.id,jdbcType=BIGINT},
+      company_code = #{record.companyCode,jdbcType=VARCHAR},
+      purchase_date = #{record.purchaseDate,jdbcType=VARCHAR},
+      shop_owner_code = #{record.shopOwnerCode,jdbcType=VARCHAR},
+      purchase_code = #{record.purchaseCode,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      order_code = #{record.orderCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.duan.buyer.entity.UserPurchaseOrder" >
+    update user_purchase_order
+    <set >
+      <if test="companyCode != null" >
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date = #{purchaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="shopOwnerCode != null" >
+        shop_owner_code = #{shopOwnerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseCode != null" >
+        purchase_code = #{purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderCode != null" >
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.duan.buyer.entity.UserPurchaseOrder" >
+    update user_purchase_order
+    set company_code = #{companyCode,jdbcType=VARCHAR},
+      purchase_date = #{purchaseDate,jdbcType=VARCHAR},
+      shop_owner_code = #{shopOwnerCode,jdbcType=VARCHAR},
+      purchase_code = #{purchaseCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      order_code = #{orderCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

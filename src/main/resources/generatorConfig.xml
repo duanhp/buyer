@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--mysql 连接数据库jar 这里选择自己本地位置-->
+    <classPathEntry location="C:/mysql-connector-java-5.1.46.jar"/>
+    <context id="testTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/buyer?characterEncoding=utf8" userId="root"
+                        password="123456">
+        </jdbcConnection>
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+           NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.duan.buyer.entity"
+                            targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置
+           如果maven工程只是单独的一个工程，targetProject="src/main/java"
+           若果maven工程是分模块的工程，targetProject="所属模块的名称"，例如：
+           targetProject="ecps-manager-mapper"，下同-->
+        <sqlMapGenerator targetPackage="mybatis.mysql"
+                         targetProject="src/main/resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.duan.buyer.dao"
+                             targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!-- 指定数据库表 -->
+        <!--
+        <table schema="" tableName="Market_Trade_Current"></table>
+        <table schema="" tableName="Market_Netflow"></table>
+
+
+        <table schema="" tableName="Market_Trade_Weight_Current"></table>
+        <table schema="" tableName="Market_Depth"></table>
+        <table schema="" tableName="Market_Weight_Kline"></table>
+        <table schema="" tableName="Market_Trades"></table>
+
+        <table schema="" tableName="User_Account"></table>
+        <table schema="" tableName="User_ActiveCode"></table>
+        <table schema="" tableName="User_FromKey"></table>
+        <table schema="" tableName="User_Logs"></table>
+        <table schema="" tableName="User_SelectAsset"></table>
+        <table schema="" tableName="Market_Information"></table>
+		<table schema="" tableName="Exchange_Symbol"></table>
+        
+		<table schema="" tableName="Coin_Info"></table>
+        
+        <table schema="" tableName="User_PriceAlertSet"></table>
+        <table schema="" tableName="User_PriceAlert"></table>
+        <table schema="" tableName="Exchange_Info"></table>
+        <table schema="" tableName="User_AlertLog">
+       
+
+
+         <table schema="" tableName="Quant_User_product"></table>
+         <table schema="" tableName="Quant_User_Select_product"></table>
+         <table schema="" tableName="Quant_User_Product_Params"></table>
+         <table schema="" tableName="Quant_User_Exchange_Discount"></table>
+         <table schema="" tableName="Quant_Order"></table>
+         <table schema="" tableName="Quant_benefit"></table>
+         <table schema="" tableName="Quant_sim"></table>
+         <table schema="" tableName="Quant_Sim_Yield"></table>
+         <table schema="" tableName="Quant_Exchange_Fee"></table>
+         
+-->
+        <!--
+        <table schema="" tableName="Exchange_Symbol_Area"></table>
+
+        -->
+        <table schema="" tableName="company_info"></table>
+        <table schema="" tableName="datadict"></table>
+        <table schema="" tableName="material_info"></table>
+        <table schema="" tableName="user_log"></table>
+        <table schema="" tableName="user_login"></table>
+        <table schema="" tableName="user_material"></table>
+        <table schema="" tableName="user_purchase_order"></table>
+        <table schema="" tableName="user_role_info"></table>
+        <table schema="" tableName="user_role_relation"></table>
+
+
+
+
+    </context>
+</generatorConfiguration>

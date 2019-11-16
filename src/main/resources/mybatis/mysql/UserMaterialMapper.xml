@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duan.buyer.dao.UserMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.duan.buyer.entity.UserMaterial" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="purchase_date" property="purchaseDate" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="material_name" property="materialName" jdbcType="VARCHAR" />
+    <result column="material_unit" property="materialUnit" jdbcType="VARCHAR" />
+    <result column="material_amount" property="materialAmount" jdbcType="DECIMAL" />
+    <result column="material_real_amount" property="materialRealAmount" jdbcType="DECIMAL" />
+    <result column="purchase_code" property="purchaseCode" jdbcType="VARCHAR" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="DATE" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="DATE" />
+    <result column="material_price" property="materialPrice" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, purchase_date, user_code, material_name, material_unit, material_amount, material_real_amount, 
+    purchase_code, gmt_modify, gmt_create, material_price, remark, remark2, order_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duan.buyer.entity.UserMaterialExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_material
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_material
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.duan.buyer.entity.UserMaterialExample" >
+    delete from user_material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.duan.buyer.entity.UserMaterial" >
+    insert into user_material (id, purchase_date, user_code, 
+      material_name, material_unit, material_amount, 
+      material_real_amount, purchase_code, gmt_modify, 
+      gmt_create, material_price, remark, 
+      remark2, order_code)
+    values (#{id,jdbcType=BIGINT}, #{purchaseDate,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, 
+      #{materialName,jdbcType=VARCHAR}, #{materialUnit,jdbcType=VARCHAR}, #{materialAmount,jdbcType=DECIMAL}, 
+      #{materialRealAmount,jdbcType=DECIMAL}, #{purchaseCode,jdbcType=VARCHAR}, #{gmtModify,jdbcType=DATE}, 
+      #{gmtCreate,jdbcType=DATE}, #{materialPrice,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{remark2,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.duan.buyer.entity.UserMaterial" >
+    insert into user_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="materialName != null" >
+        material_name,
+      </if>
+      <if test="materialUnit != null" >
+        material_unit,
+      </if>
+      <if test="materialAmount != null" >
+        material_amount,
+      </if>
+      <if test="materialRealAmount != null" >
+        material_real_amount,
+      </if>
+      <if test="purchaseCode != null" >
+        purchase_code,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="materialPrice != null" >
+        material_price,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="orderCode != null" >
+        order_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseDate != null" >
+        #{purchaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialUnit != null" >
+        #{materialUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="materialAmount != null" >
+        #{materialAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="materialRealAmount != null" >
+        #{materialRealAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purchaseCode != null" >
+        #{purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=DATE},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=DATE},
+      </if>
+      <if test="materialPrice != null" >
+        #{materialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null" >
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.duan.buyer.entity.UserMaterialExample" resultType="java.lang.Integer" >
+    select count(*) from user_material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_material
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.purchaseDate != null" >
+        purchase_date = #{record.purchaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCode != null" >
+        user_code = #{record.userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null" >
+        material_name = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialUnit != null" >
+        material_unit = #{record.materialUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialAmount != null" >
+        material_amount = #{record.materialAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.materialRealAmount != null" >
+        material_real_amount = #{record.materialRealAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.purchaseCode != null" >
+        purchase_code = #{record.purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gmtModify != null" >
+        gmt_modify = #{record.gmtModify,jdbcType=DATE},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=DATE},
+      </if>
+      <if test="record.materialPrice != null" >
+        material_price = #{record.materialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark2 != null" >
+        remark2 = #{record.remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCode != null" >
+        order_code = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_material
+    set id = #{record.id,jdbcType=BIGINT},
+      purchase_date = #{record.purchaseDate,jdbcType=VARCHAR},
+      user_code = #{record.userCode,jdbcType=VARCHAR},
+      material_name = #{record.materialName,jdbcType=VARCHAR},
+      material_unit = #{record.materialUnit,jdbcType=VARCHAR},
+      material_amount = #{record.materialAmount,jdbcType=DECIMAL},
+      material_real_amount = #{record.materialRealAmount,jdbcType=DECIMAL},
+      purchase_code = #{record.purchaseCode,jdbcType=VARCHAR},
+      gmt_modify = #{record.gmtModify,jdbcType=DATE},
+      gmt_create = #{record.gmtCreate,jdbcType=DATE},
+      material_price = #{record.materialPrice,jdbcType=DECIMAL},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      remark2 = #{record.remark2,jdbcType=VARCHAR},
+      order_code = #{record.orderCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.duan.buyer.entity.UserMaterial" >
+    update user_material
+    <set >
+      <if test="purchaseDate != null" >
+        purchase_date = #{purchaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null" >
+        material_name = #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialUnit != null" >
+        material_unit = #{materialUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="materialAmount != null" >
+        material_amount = #{materialAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="materialRealAmount != null" >
+        material_real_amount = #{materialRealAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purchaseCode != null" >
+        purchase_code = #{purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify = #{gmtModify,jdbcType=DATE},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=DATE},
+      </if>
+      <if test="materialPrice != null" >
+        material_price = #{materialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null" >
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.duan.buyer.entity.UserMaterial" >
+    update user_material
+    set purchase_date = #{purchaseDate,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      material_name = #{materialName,jdbcType=VARCHAR},
+      material_unit = #{materialUnit,jdbcType=VARCHAR},
+      material_amount = #{materialAmount,jdbcType=DECIMAL},
+      material_real_amount = #{materialRealAmount,jdbcType=DECIMAL},
+      purchase_code = #{purchaseCode,jdbcType=VARCHAR},
+      gmt_modify = #{gmtModify,jdbcType=DATE},
+      gmt_create = #{gmtCreate,jdbcType=DATE},
+      material_price = #{materialPrice,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      order_code = #{orderCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
